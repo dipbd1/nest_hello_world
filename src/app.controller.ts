@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Query, Redirect } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -8,5 +8,10 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+  @Get('music')
+  @Redirect('https://www.youtube.com')
+  watchMusic(@Query('name') name: string) {
+    return { url: `https://www.youtube.com/results?search_query=${name}` };
   }
 }
